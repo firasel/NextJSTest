@@ -1,6 +1,32 @@
-import Head from 'next/head'
+import axios from "axios";
+import Head from "next/head";
+axios.defaults.baseURL = "https://user-taskapi.herokuapp.com/";
+// axios.defaults.crossDomain = true;
+// axios.defaults.withCredentials  = true;
 
 export default function Home() {
+  const loginHandle = () => {
+    // axios
+    //   .post("/user/login", {
+    //     email: "example@gmail.com",
+    //     password: "example",
+    //   })
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
+
+    fetch("https://user-taskapi.herokuapp.com/user/login", {
+      method: "POST",
+      credentials: 'include',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: "example@gmail.com",
+        password: "example",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div className="container">
       <Head>
@@ -46,6 +72,9 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <button className="loginBtn" onClick={loginHandle}>
+          Login
+        </button>
       </main>
 
       <footer>
@@ -54,12 +83,20 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
+          Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
         </a>
       </footer>
 
       <style jsx>{`
+        .loginBtn {
+          padding: 10px 20px;
+          font-size: 20px;
+          background: #0070f3;
+          color: white;
+          border-radius: 5px;
+          border: 0;
+        }
+
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -205,5 +242,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
