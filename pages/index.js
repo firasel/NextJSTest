@@ -1,22 +1,12 @@
 import axios from "axios";
 import Head from "next/head";
 axios.defaults.baseURL = "https://user-taskapi.herokuapp.com/";
-// axios.defaults.crossDomain = true;
-// axios.defaults.withCredentials  = true;
 
 export default function Home() {
   const loginHandle = () => {
-    // axios
-    //   .post("/user/login", {
-    //     email: "example@gmail.com",
-    //     password: "example",
-    //   })
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
 
     fetch("https://user-taskapi.herokuapp.com/user/login", {
       method: "POST",
-      credentials: 'include',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: "example@gmail.com",
@@ -35,43 +25,6 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
         <button className="loginBtn" onClick={loginHandle}>
           Login
         </button>
@@ -95,6 +48,7 @@ export default function Home() {
           color: white;
           border-radius: 5px;
           border: 0;
+          cursor: pointer;
         }
 
         .container {
