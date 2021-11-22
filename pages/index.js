@@ -1,12 +1,11 @@
-import axios from "axios";
 import Head from "next/head";
-axios.defaults.baseURL = "https://user-taskapi.herokuapp.com/";
 
 export default function Home() {
   const loginHandle = () => {
-
     fetch("https://user-taskapi.herokuapp.com/user/login", {
       method: "POST",
+      credentials: 'include',
+      withCredentials:true,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         email: "example@gmail.com",
@@ -15,6 +14,19 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
+  };
+
+  const userInformationGet = () => {
+    fetch("https://user-taskapi.herokuapp.com/user/check",{
+      method: 'GET',
+      credentials: 'include',
+      withCredentials:true
+  })
+      .then((res) => res.json())
+      .then((data) =>{ 
+        console.log(data);
+        alert("Open the console and see response data");
+      });
   };
 
   return (
@@ -27,6 +39,10 @@ export default function Home() {
       <main>
         <button className="loginBtn" onClick={loginHandle}>
           Login
+        </button>
+        <br />
+        <button className="loginBtn" onClick={userInformationGet}>
+          Get
         </button>
       </main>
 
@@ -49,6 +65,7 @@ export default function Home() {
           border-radius: 5px;
           border: 0;
           cursor: pointer;
+          margin-bottom: 3rem;
         }
 
         .container {
